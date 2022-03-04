@@ -7,11 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   nombre: string = "Chapulin Colorado";
+  nombreCholo: string = "eL ZhAVVVHoooo dEl OSSSHhhhhoooo";
   Pi: number = Math.PI;
   percentage: number = 0.234;
   arreglo: number[] = [1,2,3,4,5,6,7,8,9,10];
   salary: number = 1234.5;
   currentDay: Date = new Date();
+  language: string = "es";
+  videoURL: string = "https://www.youtube.com/embed/SV00jQZEFCU";
+  password: string = "0918273465";
+  passwordActivation: boolean = true;
 
   promiseValue = new Promise<string>((resolve) =>{
     setTimeout(()=>{

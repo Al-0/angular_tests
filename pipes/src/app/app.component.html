@@ -28,6 +28,17 @@
         </tr>
 
         <tr>
+          <td>{{ nombreCholo }}</td>
+          <td> capitalize </td>
+          <td> {{ nombreCholo | capitalize }}</td>
+        </tr>
+        <tr>
+          <td>{{ nombreCholo }}</td>
+          <td> capitalize:false </td>
+          <td> {{ nombreCholo | capitalize:false }}</td>
+        </tr>
+
+        <tr>
           <td>{{ nombre }}</td>
           <td> slice: 3 </td>
           <td> {{ nombre | slice:3 }}</td>
@@ -87,11 +98,11 @@
           <td> {{ salary | currency:'CAD':'symbol':'.0-0' }}</td>
         </tr>
 
-        <tr>
+<!--         <tr>
           <td>{{ promiseValue }}</td>
           <td> json </td>
           <td> {{ promiseValue | json }}</td>
-        </tr>
+        </tr> -->
 
         <tr>
           <td>{{ promiseValue }}</td>
@@ -123,6 +134,43 @@
           <td> {{ currentDay | date:'MMMM-dd' }}</td>
         </tr>
 
+        <tr>
+          <td>{{ currentDay }}</td>
+          <td> date:'MMMM-dd':'':'en' </td>
+          <td> {{ currentDay | date:'MMMM-dd':'':'en' }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ currentDay }}</td>
+          <td> date:'MMMM-dd':'':'de' </td>
+          <td> {{ currentDay | date:'MMMM-dd':'':'de' }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ currentDay }}</td>
+          <td> 
+            date:'MMMM-dd':'':'{{ language }}' 
+            <br>
+            <button (click)='language="es"' class="mr-1 btn btn-primary">Spanish</button>
+            <button (click)='language="en"' class="mr-1 btn btn-success">English</button>
+            <button (click)='language="de"' class="mr-1 btn btn-danger">German</button>
+          </td>
+          <td> {{ currentDay | date:'MMMM-dd':'':language }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ password }}</td>
+          <td> 
+            password: {{passwordActivation}}
+            <br>
+            <button (click)="passwordActivation = !passwordActivation" class="btn btn-outline-primary">
+              Activate/Deactivate
+            </button>
+          </td>
+          <td> {{ password | passwordActivation:passwordActivation }}</td>
+        </tr>
+
+
       </tbody>
     </table>
 
@@ -141,6 +189,20 @@
           {{heroe | json}}
         </pre>
       
+      </div>
+    </div>
+
+    <h4 class="mt-4"> Secure DOM</h4>
+    <hr>
+    <div class="row">
+      <div class="col">
+        <iframe width="560" 
+                height="315" 
+                [src]="videoURL | secureDom" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
       </div>
     </div>
 
