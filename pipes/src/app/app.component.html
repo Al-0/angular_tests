@@ -1,0 +1,149 @@
+<h1 class="mt-3">Pipes <small>Angular</small></h1>
+<hr>
+
+<div class="row">
+
+  <div class="col">
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th> Variable </th>
+          <th> Pipe </th>
+          <th> Output </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>{{ nombre }}</td>
+          <td> uppercase </td>
+          <td> {{ nombre | uppercase }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ nombre }}</td>
+          <td> lowercase </td>
+          <td> {{ nombre | lowercase }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ nombre }}</td>
+          <td> slice: 3 </td>
+          <td> {{ nombre | slice:3 }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ nombre }}</td>
+          <td> slice:0:3 </td>
+          <td> {{ nombre | slice:0:3 }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ arreglo }}</td>
+          <td> slice:1:5 </td>
+          <td> {{ arreglo | slice:1:5 }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ Pi }}</td>
+          <td> number:'3.0-0' </td>
+          <td> {{ Pi | number:'3.0-0' }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ Pi }}</td>
+          <td> number:'.0-2' </td>
+          <td> {{ Pi | number:'.0-2' }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ percentage }}</td>
+          <td> percent </td>
+          <td> {{ percentage | percent }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ percentage }}</td>
+          <td> percent:'2.2-2' </td>
+          <td> {{ percentage | percent:'2.2-2' }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ salary }}</td>
+          <td> currency </td>
+          <td> {{ salary | currency }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ salary }}</td>
+          <td> currency: 'EUR' </td>
+          <td> {{ salary | currency: 'EUR' }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ salary }}</td>
+          <td> currency: 'CAD':'symbol':'.0-0' </td>
+          <td> {{ salary | currency:'CAD':'symbol':'.0-0' }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ promiseValue }}</td>
+          <td> json </td>
+          <td> {{ promiseValue | json }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ promiseValue }}</td>
+          <td> async </td>
+          <td> {{ promiseValue | async }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ currentDay }}</td>
+          <td> date </td>
+          <td> {{ currentDay | date }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ currentDay }}</td>
+          <td> date:'medium' </td>
+          <td> {{ currentDay | date:'medium' }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ currentDay }}</td>
+          <td> date:'short' </td>
+          <td> {{ currentDay | date:'short' }}</td>
+        </tr>
+
+        <tr>
+          <td>{{ currentDay }}</td>
+          <td> date:'MMMM-dd' </td>
+          <td> {{ currentDay | date:'MMMM-dd' }}</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <h4> Slice </h4><small>slice 5:20</small>
+    <hr>
+    <ul>
+      <li *ngFor="let num of arreglo | slice:5:20">{{ num }}</li>
+    </ul>
+
+    <h4> JSON </h4>
+    <hr>
+    <div class="row">
+      <div class="col">
+
+        <pre>
+          {{heroe | json}}
+        </pre>
+      
+      </div>
+    </div>
+
+  </div>
+
+</div>
