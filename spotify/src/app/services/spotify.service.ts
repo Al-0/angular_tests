@@ -2,35 +2,55 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { AccessToken } from '../interfaces/acessToken';
+import { AccessToken } from '../interfaces/accessToken';
+import { ArtistInfo } from '../interfaces/artistInfo';
+import { ArtistsRoot } from '../interfaces/artists';
 import { NewReleases } from '../interfaces/newReleases';
+import { TopTracks } from '../interfaces/topTracks';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SpotifyService {
   token: string = '';
+  headers: HttpHeaders = new HttpHeaders;
 
   constructor(private http: HttpClient) {
     this.getToken().subscribe((response: AccessToken) => {
       this.token = response.access_token;
+      this.headers = new HttpHeaders({
+        Authorization:
+          `Bearer ${this.token}`,
+      });
     });
+  }
+
+  getQuery(url: string){
+    return this.http
+      .get(`${environment.spotifyURL}${url}`, {
+        headers: this.headers,
+      })
   }
 
   getnewReleases() {
-    const headers = new HttpHeaders({
-      Authorization:
-        `Bearer ${this.token}`,
-    });
-
-    return this.http
-      .get('https://api.spotify.com/v1/browse/new-releases?limit=10', {
-        headers,
-      })
+    return this.getQuery('browse/new-releases?limit=10')
       .pipe(map((x) => x as NewReleases));
   }
 
-  getArtist(query: string) {}
+  getArtists(query: string) {
+    return this.getQuery(`search?query=${query}&type=artist&market=ES&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=15`)
+      .pipe(map((x) => x as ArtistsRoot));
+  }
+
+  getArtistInfo(id: string){
+    return this.getQuery(`artists/${id}`)
+      .pipe(map(x => x as ArtistInfo));
+  }
+
+  getTopTracks(id: string){
+    return this.getQuery(`artists/${id}/top-tracks?market=es`)
+      .pipe(map(x => x as TopTracks));
+  }
 
   getToken() {
     const clientId = environment.clientId;

@@ -1,1 +1,57 @@
-<p>artist works!</p>
+<div *ngIf="$artistInfo | async as artistInfo; else loading" class="row animated fadeIn">
+  <div class="col-2">
+    <img [src]="artistInfo.images | noImage" class="img-thumbnail img-circle" />
+  </div>
+
+  <div class="col">
+    <h3>
+      {{ artistInfo.name }}
+    </h3>
+    <p>
+      <a [href]="artistInfo.external_urls.spotify" target="_blank">
+        See artist's page.
+      </a>
+    </p>
+  </div>
+
+  <div class="col-4 text-right">
+      <button routerLink="/search" class='btn btn-outline-danger'>
+          Back to search
+      </button>
+  </div>
+</div>
+
+<div class="row animated fadeIn mt-5" *ngIf="$artistTopTracks | async as artistTopTracks">
+    <div class="col">
+
+        <table class="table" style="color:white">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Album</th>
+                    <th>Song</th>
+                    <th>Preview</th>
+                </tr>
+            </thead>    
+
+            <tbody>
+                <tr *ngFor="let track of artistTopTracks.tracks">
+                    <td>
+                        <img [src]="track.album.images | noImage" class="img-thumb">
+                    </td>
+                    <td>{{ track.album.name }}</td>
+                    <td>{{ track.name }}</td>
+                    <td>
+                        <!-- <audio [src]="track.preview_url" controls></audio> -->
+                        <iframe style="border-radius:12px" [src]="track.id | secureDom:'https://open.spotify.com/embed/track/_ID_?utm_source=generator'" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
