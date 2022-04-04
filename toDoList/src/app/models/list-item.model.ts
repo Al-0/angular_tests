@@ -4,5 +4,6 @@ export class ListItem{
 
     constructor(desc: string){
         this.description = desc;
+        this.completed = false;
     }
 }

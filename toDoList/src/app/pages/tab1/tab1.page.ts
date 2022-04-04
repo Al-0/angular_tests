@@ -18,7 +18,6 @@ export class Tab1Page {
   }
 
   async addList(){
-    //this.router.navigateByUrl('tabs/tab1/add');
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'New List',
@@ -33,6 +32,17 @@ export class Tab1Page {
         {
           text: 'Cancel',
           role: 'cancel',
+        },
+        {
+          text: 'Create',
+          handler: (data) => {
+            if (data.title.length === 0){
+              return;
+            }
+
+            const listId = this.toDoService.createList(data.title);
+            this.router.navigateByUrl(`tabs/tab1/add/${listId}`);
+          },
         }
       ]
     });

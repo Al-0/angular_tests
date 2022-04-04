@@ -9,8 +9,33 @@ export class ToDoService {
   list: List[] = [];
 
   constructor() {
-    const list1 = new List('Be positive');
-    const list2 = new List('Laugh');
-    this.list.push(list1,list2);
+    this.list = this.loadStorage();
+  }
+
+  createList( title: string){
+    const newList = new List(title);
+    this.list.push(newList);
+    this.saveStorage();
+
+    return newList.id;
+  }
+
+  getList( id: string | number ){
+    id = Number(id);
+
+    return this.list.find(listData => listData.id === id);
+  }
+
+  eraseList( listToDelete: List){
+    this.list = this.list.filter(l => l.id !== listToDelete.id);
+    this.saveStorage();
+  }
+
+  saveStorage(){
+    localStorage.setItem('data', JSON.stringify(this.list));
+  }
+
+  loadStorage(){
+    return JSON.parse(localStorage.getItem('data')) || [];
   }
 }
