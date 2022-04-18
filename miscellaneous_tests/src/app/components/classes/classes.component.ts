@@ -24,4 +24,5 @@ export class ClassesComponent implements OnInit {
 
 interface Props {
   danger: boolean;
+  warning?: boolean;
 }

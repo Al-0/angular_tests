@@ -18,4 +18,12 @@ export class HighlightDirective {
     this.el.nativeElement.style.backgroundColor = null;
   }
 
+  @HostListener('focus') Focus(){
+    this.el.nativeElement.style.backgroundColor = this.newColor || 'yellow';
+  }
+
+  @HostListener('blur') Blur(){
+    this.el.nativeElement.style.backgroundColor = null;
+  }
+
 }

@@ -1,6 +1,6 @@
 <div class="alert" role="alert" [ngClass]="alert">
   This is a success alert with
-  <a href="#" class="alert-link">an example link</a>. Give it a click if you
+  <a href="#" class="alert-link" [appHighlight]="'orange'">an example link</a>. Give it a click if you
   like.
 </div>
 
@@ -27,7 +27,8 @@
   class="btn"
   [ngClass]="{
     'btn-danger': properties.danger,
-    'btn-info': !properties.danger
+    'btn-info': !properties.danger,
+    'test': !loading
   }"
   (click)="properties.danger = !properties.danger"
 >
@@ -39,7 +40,7 @@
 
 <button type="button" class="btn btn-primary" (click)="execute()" [disabled]="loading">
   <i
-    [ngClass]="{ 'fa-save': !loading, 'fa-refresh fa-spin': this.loading }"
+    [ngClass]="{ 'fa-save': !loading, 'fa-refresh fa-spin': loading }"
     class="fa"
   ></i>
   <span *ngIf="!loading"> Save changes</span> 
