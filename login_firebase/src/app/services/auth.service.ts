@@ -87,7 +87,7 @@ export class AuthService {
       return false;
     }
     else{
-      const expire = Number(localStorage.getItem('expire'));
+      const expire = Number(localStorage.getItem('expires'));
       const expireDate = new Date();
       expireDate.setTime(expire);
 
