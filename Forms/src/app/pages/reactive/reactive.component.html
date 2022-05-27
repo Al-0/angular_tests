@@ -1,50 +1,176 @@
 <h4>Form <small> Reactive </small></h4>
-<hr>
-<form autocomplete="off">
-
+<hr />
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="save()">
   <div>
-
     <div class="form-group row">
       <label class="col-2 col-form-label">Name</label>
-      <div class="col-8">
-
-        <input class="form-control"
-               type="text"
-               placeholder="Name">
+      <div class="col">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Name"
+          formControlName="name"
+          [class.is-invalid]="invalidName"
+        />
+        <small *ngIf="invalidName" class="text-danger">
+          Length must be at least 4 characters
+        </small>
       </div>
     </div>
 
     <div class="form-group row">
       <label class="col-2 col-form-label">Last name</label>
-      <div class="col-8">
-
-        <input class="form-control"
-               type="text"
-               placeholder="Last name">
+      <div class="col">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Last name"
+          formControlName="lastName"
+          [class.is-invalid]="invalidLastName"
+        />
+        <small *ngIf="invalidLastName" class="text-danger">
+          Length must be at least 4 characters and NO SMITHS allowed
+        </small>
       </div>
     </div>
-
   </div>
 
   <div class="form-group row">
     <label class="col-2 col-form-label">Email</label>
-    <div class="col-8">
-
-      <input class="form-control"
-             type="email"
-             placeholder="Email">
+    <div class="col">
+      <input
+        class="form-control"
+        type="email"
+        placeholder="Email"
+        formControlName="email"
+        [class.is-invalid]="invalidEmail"
+      />
+      <small *ngIf="invalidEmail" class="text-danger">
+        A valid email must be provided.
+      </small>
     </div>
   </div>
 
-
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Username</label>
+    <div class="col">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Username"
+        formControlName="username"
+        [class.is-invalid]="invalidUser"
+      />
+      <small *ngIf="invalidUser" class="text-danger">
+        This username is already in use.
+      </small>
+    </div>
+  </div>
 
   <div class="form-group row">
-    <label class="col-2 col-form-label">&nbsp;</label>
-    <div class="input-group col-md-8">
-      <button type="submit" class="btn btn-outline-primary col-12">
-        Save
+    <label class="col-2 col-form-label">Password</label>
+    <div class="col">
+      <input
+        class="form-control"
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+        [class.is-invalid]="invalidPassword"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Confirm Password</label>
+    <div class="col">
+      <input
+        class="form-control"
+        type="password"
+        placeholder="Confirm Password"
+        formControlName="confirmPassword"
+        [class.is-invalid]="invalidConfirmPassword"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row" formGroupName="address">
+    <label class="col-2 col-form-label">Address</label>
+    <div class="form-row col">
+      <div class="col">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Street"
+          formControlName="street"
+          [class.is-invalid]="invalidStreet"
+        />
+        <small *ngIf="invalidStreet" class="text-danger">
+          A street must be provided.
+        </small>
+      </div>
+      <div class="col">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="City"
+          formControlName="city"
+          [class.is-invalid]="invalidCity"
+        />
+        <small *ngIf="invalidCity" class="text-danger">
+          A city must be provided.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Id</th>
+            <th>Hobbie</th>
+            <th>Erase</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="hobbies">
+          <tr *ngFor="let control of hobbies.controls; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <input class="form-control" type="text" [formControlName]="i" />
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="eraseHobbie(i)">Erase</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button
+        class="btn btn-primary mt-3 mb-5 col-12"
+        type="button"
+        (click)="addHobbie()"
+      >
+        + Add
       </button>
     </div>
   </div>
 
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col">
+      <button type="submit" class="btn btn-outline-primary col-12">Save</button>
+    </div>
+  </div>
 </form>
+
+<hr />
+<pre>
+  Form state: {{ form.valid }}
+  <br>
+  Status: {{ form.status }}
+</pre>
+
+<pre>
+  {{ form.value | json }}
+</pre>
