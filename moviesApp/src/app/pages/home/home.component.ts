@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Movie } from 'src/app/interfaces/movie-listings';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -9,13 +9,28 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class HomeComponent implements OnInit {
   public movies: Movie[] = []; 
+  public moviesSlideshow: Movie[] = []; 
 
+  @HostListener('window:scroll', ['$event'])
+  onScroll(){
+    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + 1300;
+    const max = document.documentElement.scrollHeight || document.body.scrollHeight;
+
+    if (pos > max && !this.moviesService.loading){
+      this.moviesService.getListing().subscribe(res =>{
+        this.movies.push(...res)
+        console.log(this.movies)
+      })
+    }
+  }
+   
   constructor(private moviesService: MoviesService) {}
 
   ngOnInit(): void {
     this.moviesService.getListing().subscribe(res => {
       // console.log(res.results);
-      this.movies = res.results;
+      this.movies = res;
+      this.moviesSlideshow = res;
     })
   }
 }

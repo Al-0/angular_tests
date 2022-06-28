@@ -7,3 +7,19 @@ h3 {
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
   margin: 5px;
 }
+
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 15px;
+  color: grey;
+}
+.full {
+  color: yellow;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: yellow;
+}
