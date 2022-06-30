@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
 
   searchMovie(movie: string) {
     movie = movie.trim();
-
+    console.log(movie)
     if (movie.length === 0) return;
 
     this.router.navigate(['/search', movie]);

@@ -8,6 +8,10 @@ h3 {
   margin: 5px;
 }
 
+img {
+  cursor: pointer;
+}
+
 .star {
   position: relative;
   display: inline-block;
