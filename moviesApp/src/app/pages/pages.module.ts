@@ -4,8 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { MovieComponent } from './movie/movie.component';
 import { SearchComponent } from './search/search.component';
 import { ComponentsModule } from '../components/components.module';
-
-
+import { PipesModule } from '../pipes/pipes.module';
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,9 @@ import { ComponentsModule } from '../components/components.module';
   ],
   imports: [
     CommonModule,
-    ComponentsModule
+    ComponentsModule,
+    PipesModule,
+    NgbRatingModule
   ]
 })
 export class PagesModule { }
