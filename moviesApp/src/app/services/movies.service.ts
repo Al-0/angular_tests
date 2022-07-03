@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, tap, map } from 'rxjs';
+import { Observable, of, tap, map, catchError } from 'rxjs';
+import { Cast, Credits } from '../interfaces/credits';
 import { MovieDetails } from '../interfaces/movie-details';
 import { Movie, MovieListings } from '../interfaces/movie-listings';
 
@@ -41,23 +42,35 @@ export class MoviesService {
   }
 
   searchMovie(movie: string): Observable<Movie[]> {
-    const params = {...this.params, page: 1, query: movie}
+    const params = { ...this.params, page: 1, query: movie };
 
     return this.http
       .get<MovieListings>(`${this.baseURL}/search/movie`, {
-        params
+        params,
       })
       .pipe(map((res) => res.results));
   }
 
-  resetPage(){
+  resetPage() {
     this.page = 1;
   }
 
-  getMovieDetails(id: string): Observable<MovieDetails>{
+  getMovieDetails(id: string): Observable<MovieDetails | null> {
     return this.http
       .get<MovieDetails>(`${this.baseURL}/movie/${id}`, {
-        params: this.params
-      });
+        params: this.params,
+      })
+      .pipe(catchError(() => of(null)));
+  }
+
+  getCast(id: string): Observable<Cast[]> {
+    return this.http
+      .get<Credits>(`${this.baseURL}/movie/${id}/credits`, {
+        params: this.params,
+      })
+      .pipe(
+        map((res) => res.cast),
+        catchError(() => of([]))
+      );
   }
 }

@@ -1,0 +1,18 @@
+<!-- Slider main container -->
+<div class="swiper">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+    <div
+      class="swiper-slide text-white text-center"
+      *ngFor="let castMember of cast"
+    >
+      <img
+        [alt]="castMember.name"
+        [src]="castMember.profile_path | poster"
+        class="img-thumbnail"
+      />
+      {{ castMember.name }}
+    </div>
+  </div>
+</div>
