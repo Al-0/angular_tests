@@ -1,6 +1,35 @@
 <mat-card>
   <mat-card-title>Google Map</mat-card-title>
   <mat-card-content>
-    Simple card
+    <google-map
+      height="750px"
+      width="100%"
+      [center]="center"
+      [zoom]="zoom"
+      (mapClick)="addMarker($event)"
+    >
+      <map-marker
+        #markerRef="mapMarker"
+        *ngFor="let marker of markers; let i = index"
+        [position]="marker"
+        (mapClick)="openInfoWindow(markerRef)"
+      >
+        <map-info-window [position]="marker">
+          <strong>{{ marker.title }}</strong>
+
+          <p>
+            {{ marker.description }}
+          </p>
+
+          <div>
+            <button mat-raised-button color="primary">Edit</button>
+            <button mat-raised-button color="warn" (click)="onDelete(i)">Delete</button>
+          </div>
+        </map-info-window>
+      </map-marker>
+    </google-map>
+
+    <div>Latitude: {{ display?.lat }}</div>
+    <div>Longitude: {{ display?.lng }}</div>
   </mat-card-content>
 </mat-card>
