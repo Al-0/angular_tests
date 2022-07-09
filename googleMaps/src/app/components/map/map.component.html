@@ -22,8 +22,10 @@
           </p>
 
           <div>
-            <button mat-raised-button color="primary">Edit</button>
-            <button mat-raised-button color="warn" (click)="onDelete(i)">Delete</button>
+            <button mat-raised-button color="primary" (click)="editMarker(marker)">Edit</button>
+            <button mat-raised-button color="warn" (click)="onDelete(i)">
+              Delete
+            </button>
           </div>
         </map-info-window>
       </map-marker>
