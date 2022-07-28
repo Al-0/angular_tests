@@ -53,7 +53,7 @@ app.post("/goty/:id", async (req, res) =>{
   if (!gameSnap.exists) {
     res.status(404).json({
       ok: false,
-      massage: "Game with id " + id + " doesn't exist.",
+      message: "Game with id " + id + " doesn't exist.",
     });
   } else {
     const before = gameSnap.data() || {votes: 0, name: ""};

@@ -1,4 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { ChartData } from 'src/app/interfaces/chart-data.model';
 
 @Component({
   selector: 'app-horizontal-line-chart',
@@ -6,24 +7,25 @@ import { Component, OnDestroy } from '@angular/core';
   styleUrls: ['./horizontal-line-chart.component.css'],
 })
 export class HorizontalLineChartComponent implements OnDestroy {
-  data = [
-    {
-      "name": "Game 1",
-      "value": 15
-    },
-    {
-      "name": "Game 2",
-      "value": 5
-    },
-    {
-      "name": "Game 3",
-      "value": 20
-    },
-    {
-      "name": "Game 4",
-      "value": 12
-    }
-  ];;
+  @Input() data: ChartData[] = [];
+  // data = [
+  //   {
+  //     "name": "Game 1",
+  //     "value": 15
+  //   },
+  //   {
+  //     "name": "Game 2",
+  //     "value": 5
+  //   },
+  //   {
+  //     "name": "Game 3",
+  //     "value": 20
+  //   },
+  //   {
+  //     "name": "Game 4",
+  //     "value": 12
+  //   }
+  // ];
 
   // options
   showXAxis: boolean = true;
@@ -37,18 +39,18 @@ export class HorizontalLineChartComponent implements OnDestroy {
 
   colorScheme = 'nightLights';
 
-  interval;
+  // interval;
 
   constructor() {
-    this.interval = setInterval(() => {
-      const newValues = [...this.data];
+    // this.interval = setInterval(() => {
+    //   const newValues = [...this.data];
 
-      for (const item of newValues){
-        item.value = Math.round( Math.random() * 500 );
-      }
+    //   for (const item of newValues){
+    //     item.value = Math.round( Math.random() * 500 );
+    //   }
 
-      this.data = [...newValues];
-    }, 1500)
+    //   this.data = [...newValues];
+    // }, 1500)
   }
 
   onSelect(data: any): void {
@@ -56,6 +58,6 @@ export class HorizontalLineChartComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.interval);
+    // clearInterval(this.interval);
   }
 }

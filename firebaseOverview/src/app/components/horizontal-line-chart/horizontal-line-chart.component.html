@@ -1,4 +1,4 @@
-<div class="chart-container">
+<div class="chart-container" *ngIf="data.length">
     <ngx-charts-bar-horizontal
       [scheme]="colorScheme"
       [results]="data"
